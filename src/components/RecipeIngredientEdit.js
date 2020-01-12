@@ -14,14 +14,14 @@ export default function RecipeIngredientEdit({
       <input
         className="recipe-edit__input"
         type="text"
+        onChange={e => handleChange({ name: e.target.value })}
         value={ingredient.name}
-        onInput={e => handleChange({ name: e.target.value })}
       />
       <input
         className="recipe-edit__input"
         type="text"
         value={ingredient.amount}
-        onInput={e => handleChange({ amount: e.target.amount })}
+        onChange={e => handleChange({ amount: e.target.value })}
       />
       <button
         onClick={() => handleIngredientDelete(ingredient.id)}

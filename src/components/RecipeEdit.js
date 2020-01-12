@@ -28,7 +28,7 @@ export default function RecipeEdit({ recipe }) {
 
   function handleIngredientDelete(id) {
     handleChange({
-      ingredients: [recipe.ingredients.filter(i => i.id !== id)]
+      ingredients: recipe.ingredients.filter(i => i.id !== id)
     });
   }
 
@@ -76,7 +76,7 @@ export default function RecipeEdit({ recipe }) {
           id="servings"
           value={recipe.servings}
           onChange={e =>
-            handleChange({ servings: parseInt(e.target.value) || "" })
+            handleChange({ servings: parseInt(e.target.value, 10) || "" })
           }
         />
         <label className="recipe-edit__label" htmlFor="instructions">
