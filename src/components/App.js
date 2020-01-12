@@ -25,28 +25,39 @@ export default function App() {
   const recipeContextValue = {
     handleRecipeAdd,
     handleRecipeDelete,
-    handleRecipeSelect
+    handleRecipeSelect,
+    handleRecipeChange
   };
 
   function handleRecipeAdd() {
     const newRecipe = {
       id: uuidv4(),
-      name: "New",
-      servings: 1,
-      cookTime: "1:00",
-      instructions: "Inst",
-      ingredients: [{ id: uuidv4(), name: "Name", amount: "1 Tbs" }]
+      name: "",
+      servings: null,
+      cookTime: "",
+      instructions: "",
+      ingredients: [{ id: uuidv4(), name: "", amount: "" }]
     };
-
+    setSelectedRecipeId(newRecipe.id);
     setRecipes([...recipes, newRecipe]);
   }
 
   function handleRecipeDelete(id) {
+    if (selectedRecipeId != null && selectedRecipeId === id) {
+      setSelectedRecipeId(undefined);
+    }
     setRecipes(recipes.filter(recipe => recipe.id !== id));
   }
 
   function handleRecipeSelect(id) {
     setSelectedRecipeId(id);
+  }
+
+  function handleRecipeChange(id, recipe) {
+    const newRecipes = [...recipes];
+    const index = newRecipes.findIndex(r => r.id === id);
+    newRecipes[index] = recipe;
+    setRecipes(newRecipes);
   }
 
   return (
